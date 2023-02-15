@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+require_relative 'check'
+
+
+# Make it more obvious that a PR is a work in progress and shouldn't be merged yet
+warn("PR is classed as Work in Progress") if github.pr_title.include? "[WIP]"
+
+pr_description_not_valid = !Check.pr_description_valid?(github.pr_body)
+fail("PR description not full filled") if pr_description_not_valid
+
+# Warn when there is a big PR
+warn("Big PR") if git.lines_of_code > 400
+
+# Check swiftlint disabled
+swiftlint_disabled = Check.swiftlint_disabled?(github.pr_diff)
+warn("Found comment `swiftlint:disable`. Please don't do it, try to fix :).") if swiftlint_disabled

@@ -1,0 +1,81 @@
+  #
+  # Deploy
+  #
+  desc "Upload to Firebase beta"
+  desc "Requires firebase cli https://firebase.google.com/docs/cli"
+  desc "Download an install 'curl -sL firebase.tools | bash'"
+  desc "Login local machine 'firebase login' or ci 'firebase login:ci'"
+  desc "FIREBASE_CLI_TOKEN for firebase_cli_token params"
+  desc "FIREBASEAPPDISTRO_GROUPS testers group"
+  desc "FIREBASEAPPDISTRO_APP app identifier"
+  desc "FIREBASEAPPDISTRO_IPA_PATH ipa path"
+  desc "source code https://github.com/fastlane/fastlane-plugin-firebase_app_distribution"
+  lane :upload_firebase do |values|
+      firebase_app_distribution(
+                  firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+                  release_notes: default_changelog,
+                  debug: true
+      )
+  end
+
+
+  desc "Upload to TestFlight"
+  desc "https://docs.fastlane.tools/app-store-connect-api/"
+  desc "APP_STORE_CONNECT_API_KEY_KEY_ID"
+  desc "APP_STORE_CONNECT_API_KEY_ISSUER_ID"
+  desc "APP_STORE_CONNECT_API_KEY_KEY"
+  desc "IPA_OUTPUT_PATH - path for ipa upload"
+  desc "source code https://github.com/fastlane/fastlane/blob/e8d30e3494024b6d4ee81bf21448991779ca278d/fastlane/lib/fastlane/actions/upload_to_testflight.rb"
+  lane :upload_testflight do
+    api_key = app_store_connect_api_key()
+    pilot(api_key: api_key, skip_waiting_for_build_processing: true)
+  end
+
+
+  #
+  # Support
+  #
+
+  desc "Returns a default changelog."
+  desc "Get last 5 commits with a name of o branch"
+  lane :default_changelog do
+    changelog = changelog_from_git_commits(
+        commits_count: 5,
+        pretty: "- %s"
+    )
+    # Put name of a branch at start of changelog
+    begin
+        UI.message"#{changelog}"
+        UI.message"#{git_branch}"
+        changelog = "Branch: #{git_branch}\n" + changelog
+        UI.message"#{changelog}"
+        Actions.lane_context[SharedValues::FL_CHANGELOG] = changelog
+        puts changelog
+    rescue => ex
+        UI.error ex
+        UI.message"#{git_branch}"
+        changelog = "Branch: #{git_branch}"
+        puts changelog
+    end
+    changelog
+  end
+
+  desc "Download dSYMs from iTunesConnect and uploads to Crashlytics"
+  lane :refresh_dsyms do
+    download_dsyms                  # Download dSYM files from iTC
+    upload_dsyms   # Upload them to Crashlytics
+    clean_build_artifacts           # Delete the local dSYM files
+  end
+
+  desc "Upload dSYMs from local build"
+  desc "FL_UPLOAD_SYMBOLS_TO_CRASHLYTICS_DSYM_PATH - path for dsym file - example build/artifacts/App.app.dSYM.zip"
+  desc "GOOGLE_SERVICES_INFO_PLIST_PATH - path for GoogleService-Info.plist file
+  lane :upload_dsyms do
+    upload_symbols_to_crashlytics()
+  end
+
+  desc "Uploads metadata only - no ipa file will be uploaded"
+  desc "You'll get a summary of the collected metadata before it's uploaded"
+  lane :upload_metadata do
+    deliver(metadata_only: true)
+  end

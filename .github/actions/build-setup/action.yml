@@ -1,0 +1,24 @@
+name: 'setup'
+description: 'Setup build jobs'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Bundle
+      shell: bash
+      run: bundle install
+    - name: Brew
+      shell: bash
+      run: brew list rswift || brew install rswift
+    - name: Plugins
+      shell: bash
+      run: bundle exec fastlane install_plugins
+    - name: Certificates
+      shell: bash
+      run: bundle exec fastlane certificates
+    - name: Prepare
+      shell: bash
+      run: bundle exec fastlane prepare
+    - name: Increment
+      shell: bash
+      run: bundle exec fastlane run increment_build_number build_number:${{github.run_id}}

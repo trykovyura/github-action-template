@@ -1,0 +1,32 @@
+name: danger
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+# отменять предыдущие сборки при новых коммитах
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#concurrency
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  danger:
+    name: danger
+    runs-on: [ubuntu-latest]
+    timeout-minutes: 10
+    env:
+      DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler-cache: true
+      - name: Danger
+        run: bundle exec danger --dangerfile=danger/Dangerfile --danger_id=checks --verbose

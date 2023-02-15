@@ -1,0 +1,28 @@
+name: 'setup'
+description: 'Setup build jobs'
+
+inputs:
+  artifact-name:
+    description: 'Artifact name for download'
+    required: true
+    default: 'artifacts'
+  output-directory:
+    description: 'Artifact path for download'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Prepare
+      shell: bash
+      run: bundle exec fastlane prepare
+    - uses: actions/download-artifact@v3
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: ${{ inputs.output-directory }}
+    - name: TestFlight
+      shell: bash
+      run: bundle exec fastlane upload_testflight
+    - name: dSYMs
+      shell: bash
+      run: bundle exec fastlane upload_dsyms

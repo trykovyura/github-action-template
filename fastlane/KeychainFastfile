@@ -1,0 +1,54 @@
+  #
+  # Keychain
+  #
+  desc "Prepare keychain on CI or local machine"
+  lane :keychain_prepare do |values|
+    begin
+      delete_keychain_ci
+    rescue => ex
+      create_keychain_ci
+    end
+    create_keychain_ci
+    begin
+      unlock_keychain_ci
+    rescue => ex
+      UI.error(ex)
+    end
+  end
+
+  desc "Remove keychain"
+  desc "KEYCHAIN_NAME - get from ENV on CI or .env local"
+  desc "KEYCHAIN_PATH - get from ENV on CI or .env local"
+  desc "for more visit https://docs.fastlane.tools/actions/delete_keychain/"
+  desc "source code https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/delete_keychain.rb"
+  lane :delete_keychain_ci do
+    delete_keychain()
+  end
+
+  desc "Create keychain"
+  desc "KEYCHAIN_NAME - get from ENV on CI or .env local"
+  desc "KEYCHAIN_PATH - get from ENV on CI or .env local"
+  desc "KEYCHAIN_PASSWORD - get from ENV on CI or .env local"
+  desc "default_keychain - false - if true it replace login keychain"
+  desc "timeout - false - without timeout"
+  desc "for more visit https://docs.fastlane.tools/actions/create_keychain/"
+  desc "source code  https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/create_keychain.rb"
+  lane :create_keychain_ci do
+    create_keychain(
+      default_keychain: false,
+      unlock: true,
+      timeout: 0,
+      lock_when_sleeps: false,
+      lock_after_timeout: false
+    )
+  end
+
+  desc "Create keychain"
+  desc "FL_UNLOCK_KEYCHAIN_PATH - Path for keychin to unlock - get from ENV on CI or .env local"
+  desc "FL_UNLOCK_KEYCHAIN_PASSWORD - Password for keychain - get from ENV on CI or .env local"
+  desc "for more visit http://docs.fastlane.tools/actions/unlock_keychain/"
+  desc "Source code https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/unlock_keychain.rb"
+  lane :unlock_keychain_ci do |values|
+        unlock_keychain()
+  end
+

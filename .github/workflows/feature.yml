@@ -1,0 +1,86 @@
+name: Feature
+
+on:
+  push:
+    branches: [ feature/* ]
+  # Trigger manually
+  workflow_dispatch:
+
+env:
+  OUTPUT_DIRECTORY: ${{ secrets.OUTPUT_DIRECTORY }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+
+    runs-on: [self-hosted]
+    timeout-minutes: 15
+    env:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+      LANGUAGE: en_US.UTF-8
+      KEYCHAIN_NAME: ${{ secrets.KEYCHAIN_NAME }}
+      KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+      MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      FASTLANE_XCODEBUILD_SETTINGS_RETRIES: ${{ secrets.FASTLANE_XCODEBUILD_SETTINGS_RETRIES }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      # Шаг запускает ssh-agent и загружает в него приватный ключ ssh
+      # Тем самым carthage может клонировать приватные репозитории через ssh
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: 'Build setup'
+        uses: ./.github/actions/build-setup
+      - name: Build
+        run: bundle exec fastlane beta
+      - uses: actions/upload-artifact@v3
+        with:
+          name: 'feature-artifact'
+          path: ${{ secrets.OUTPUT_DIRECTORY }}
+          retention-days: 1
+  tests:
+    runs-on: [ self-hosted ]
+    timeout-minutes: 15
+    needs: [ build ]
+    env:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Prepare
+        run: bundle exec fastlane prepare
+      - name: Test
+        run: bundle exec fastlane scan
+      - uses: actions/upload-artifact@v3
+        with:
+          name: 'test-artifact'
+          path: ${{ secrets.TEST_OUTPUT_DIRECTORY }}
+          retention-days: 1
+
+  firebase_deploy:
+    runs-on: [self-hosted]
+    timeout-minutes: 15
+    needs: [build]
+    env:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+      LANGUAGE: en_US.UTF-8
+      FIREBASE_APP: ${{ secrets.FIREBASE_APP }}
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      FIREBASEAPPDISTRO_APP: ${{ secrets.FIREBASEAPPDISTRO_APP }}
+      FIREBASEAPPDISTRO_GROUPS: ${{ secrets.FIREBASEAPPDISTRO_GROUPS }}
+    steps:
+      - name: 'Firebase upload'
+        uses: ./.github/actions/firebase-upload
+        with:
+          artifact-name: 'feature-artifact'
+          output-directory: ${{ secrets.OUTPUT_DIRECTORY }}

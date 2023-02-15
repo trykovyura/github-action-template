@@ -1,0 +1,33 @@
+name: 'firebase'
+description: 'Upload ipa artifacts'
+
+inputs:
+  artifact-name:  # id of input
+    description: 'Имя артефакта для скачивания'
+    required: true
+    default: 'artifacts'
+  output-directory:
+    description: 'Путь директории для скачивания'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Prepare
+      shell: bash
+      run: bundle exec fastlane prepare
+    - uses: actions/download-artifact@v3
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: ${{ inputs.output-directory }}
+    - name: Display structure of downloaded files
+      shell: bash
+      run: ls -R
+      working-directory: ${{ inputs.output-directory }}
+    - shell: bash
+      run: bundle exec fastlane upload_firebase
+    - name: dSYMs
+      shell: bash
+      run: bundle exec fastlane upload_dsyms

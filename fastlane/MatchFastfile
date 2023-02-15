@@ -1,0 +1,31 @@
+  #
+  # Match
+  #
+  desc "Register new devices"
+  lane :register_new_devices do
+    api_key = app_store_connect_api_key()
+    register_devices(api_key: api_key, devices_file: "./fastlane/devices.txt")
+    register_new_devices_production
+  end
+
+  lane :register_new_devices_production do
+    api_key = app_store_connect_api_key()
+    match(api_key: api_key, type: "development", force_for_new_devices: true, readonly: false)
+    match(api_key: api_key, type: "adhoc", force_for_new_devices: true, readonly: false)
+    match(api_key: api_key, type: "appstore", force_for_new_devices: true, readonly: false)
+  end
+
+  desc "Download certificates"
+  lane :certificates do
+    match(type: "development", readonly: true)
+    match(type: "adhoc", readonly: true)
+    match(type: "appstore", readonly: true)
+  end
+
+  desc "Renew certificates for production scheme"
+  lane :renew_certificates do
+    api_key = app_store_connect_api_key()
+    match(api_key: api_key, type: "development", force: true)
+    match(api_key: api_key, type: "adhoc", force: true)
+    match(api_key: api_key, type: "appstore", force: true)
+  end

@@ -1,0 +1,8 @@
+scheme("YourAppScheme")
+build_path("build")
+archive_path("build/archive")
+derived_data_path("build/derived_data")
+buildlog_path("build/logs")
+clean(true)
+output_directory("build/artifacts")    # store the ipa in this folder
+output_name("YourApp")

@@ -1,0 +1,11 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+
+(*) --> "Appfile"
+Appfile --> Fastfile: app id
+Appfile --> Scanfile: app id
+Appfile --> Matchfile: app id
+Appfile --> Gymfile: app id
+
+
+@enduml

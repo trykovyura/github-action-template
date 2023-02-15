@@ -1,0 +1,68 @@
+name: Certificates
+env:
+  MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+  MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+  LC_ALL: en_US.UTF-8
+  LANG: en_US.UTF-8
+  LANGUAGE: en_US.UTF-8
+  FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: ${{ secrets.FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT }}
+  APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+  APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+  APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+  SPACESHIP_CONNECT_API_IN_HOUSE: ${{ secrets.SPACESHIP_CONNECT_API_IN_HOUSE }}
+on:
+  # Trigger manually
+  workflow_dispatch:
+    inputs:
+      app:
+        description: "Select application for update"
+        type: choice
+        options:
+          - your_app
+      job:
+        description: "Certificate task - update или register.\nupdate - updates certificate for app.\nregister - register devices for app with devices.txt file"
+        type: choice
+        options:
+          - update
+          - register
+          - nuke
+
+jobs:
+  setup:
+    name: setup
+    runs-on: [ubuntu_latest]
+    steps:
+      - name: Echo inputs
+        run: echo ${{ github.event.inputs.app }} ${{ github.event.inputs.job }}
+  update_certificates:
+    if: github.event.inputs.job == 'update'
+    name: update certificates
+    runs-on: [ubuntu_latest]
+    timeout-minutes: 15
+    needs: setup
+    steps:
+      - uses: actions/checkout@v3
+      - name: Certificates
+        run: bundle exec fastlane renew_certificates
+  register_devices:
+    if: github.event.inputs.job == 'register'
+    name: register devices
+    runs-on: [ubuntu_latest]
+    timeout-minutes: 15
+    needs: setup
+    steps:
+      - uses: actions/checkout@v3
+      - name: Certificates
+        run: bundle exec fastlane register_new_devices
+  nuke:
+    if: github.event.inputs.job == 'nuke'
+    name: nuke certificates
+    runs-on: [ubuntu_latest]
+    timeout-minutes: 15
+    needs: setup
+    steps:
+      - uses: actions/checkout@v3
+      - name: nuke development
+        run: bundle exec fastlane match nuke development --skip_confirmation
+      - name: nuke distribution
+        run: bundle exec fastlane match nuke distribution --skip_confirmation

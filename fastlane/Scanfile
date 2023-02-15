@@ -1,0 +1,8 @@
+derived_data_path("build/derived_data")
+buildlog_path("build/logs")
+output_directory("build/test_output")
+code_coverage(true)
+device("iPhone 14 Pro Max")
+ensure_devices_found(true)
+force_quit_simulator(true)
+reinstall_app(true)
