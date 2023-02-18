@@ -47,6 +47,7 @@ jobs:
           retention-days: 1
   tests:
     runs-on: [ macos-latest ]
+    if: always()
     timeout-minutes: 15
     needs: [ build ]
     env:
