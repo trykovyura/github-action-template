@@ -35,7 +35,6 @@ jobs:
     name: setup
     runs-on: [ubuntu-latest]
     steps:
-
       - name: 👂 Echo inputs
         run: echo ${{ github.event.inputs.app }} ${{ github.event.inputs.job }}
   update_certificates:
