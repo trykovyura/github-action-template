@@ -14,6 +14,7 @@ Template for Github Actions. Examples
   - [Danger](https://danger.systems/guides/getting_started.html)
   - [Fastlane Plugins](https://docs.fastlane.tools/plugins/using-plugins/)
   - `bundle lock --add-platform x86_64-linux` - just for ubuntu runs
+  - `bundle lock --add-platform x86_64-darwin-19` - just for macos runs
 
 ### Danger install
 
