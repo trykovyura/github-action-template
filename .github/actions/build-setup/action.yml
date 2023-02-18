@@ -19,3 +19,5 @@ runs:
     - name: Increment
       shell: bash
       run: bundle exec fastlane run increment_build_number build_number:${{github.run_id}}
+      env:
+        FL_BUILD_NUMBER_PROJECT = "Demo/Demo.xcodeproj"

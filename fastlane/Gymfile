@@ -1,3 +1,4 @@
+project("Demo/Demo.xcodeproj")
 scheme("YourAppScheme")
 build_path("build")
 archive_path("build/archive")
