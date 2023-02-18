@@ -13,6 +13,7 @@ module Check
 
    # Vaild PR description
    # Check defoult decription from pull_request_template.md
-   def self.pr_description_valid?(string)
+  def self.pr_description_valid?(string)
      not string.include? "_PR Template file content_"
-   end
+  end
+end
