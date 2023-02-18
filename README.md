@@ -21,6 +21,8 @@ Template for Github Actions. Examples
 - CREATING A BOT ACCOUNT FOR DANGER TO USE
 - SETTING UP AN ACCESS TOKEN
 - `DANGER_GITHUB_API_TOKEN` - [Setup instructions](https://danger.systems/guides/getting_started.html#creating-a-bot-account-for-danger-to-use)
+Make fine-grained tokens https://github.blog/2022-10-18-introducing-fine-grained-personal-access-tokens-for-github/
+For open source in security reasons no token setup
 
 
 ## Enviroments 
