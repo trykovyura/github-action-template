@@ -20,3 +20,8 @@ Template for Github Actions. Examples
 -  `bundle exec danger init`
 - CREATING A BOT ACCOUNT FOR DANGER TO USE
 - SETTING UP AN ACCESS TOKEN
+
+
+## Enviroments 
+
+- `SSH_PRIVATE_KEY` - secret with your private key for cloning private repos. [Instructions for creating key](https://github.com/webfactory/ssh-agent#usage).
