@@ -7,9 +7,6 @@ runs:
     - name: Bundle
       shell: bash
       run: bundle install
-    - name: Brew
-      shell: bash
-      run: brew list rswift || brew install rswift
     - name: Plugins
       shell: bash
       run: bundle exec fastlane install_plugins
