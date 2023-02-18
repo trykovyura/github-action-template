@@ -1,2 +1,4 @@
 .idea
 /build/
+/fastlane/README.md
+/fastlane/report.xml
