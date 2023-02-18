@@ -32,11 +32,9 @@ jobs:
     name: setup
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v3
+
       - name: 👂 Echo inputs
         run: echo ${{ github.event.inputs.app }} ${{ github.event.inputs.job }}
-      - name: 💎 Ruby setup
-        uses: ./.github/actions/ruby-setup
   update_certificates:
     if: github.event.inputs.job == 'update'
     name: update certificates
@@ -44,6 +42,9 @@ jobs:
     timeout-minutes: 15
     needs: setup
     steps:
+      - uses: actions/checkout@v3
+      - name: 💎 Ruby setup
+        uses: ./.github/actions/ruby-setup
       - name: Certificates
         run: bundle exec fastlane renew_certificates
   register_devices:
@@ -53,6 +54,9 @@ jobs:
     timeout-minutes: 15
     needs: setup
     steps:
+      - uses: actions/checkout@v3
+      - name: 💎 Ruby setup
+        uses: ./.github/actions/ruby-setup
       - name: Certificates
         run: bundle exec fastlane register_new_devices
   nuke:
@@ -62,6 +66,9 @@ jobs:
     timeout-minutes: 15
     needs: setup
     steps:
+      - uses: actions/checkout@v3
+      - name: 💎 Ruby setup
+        uses: ./.github/actions/ruby-setup
       - name: nuke development
         run: bundle exec fastlane match nuke development --skip_confirmation
       - name: nuke distribution
