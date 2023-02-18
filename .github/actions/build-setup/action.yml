@@ -10,9 +10,9 @@ runs:
     - name: Plugins
       shell: bash
       run: bundle exec fastlane install_plugins
-#    - name: Certificates
-#      shell: bash
-#      run: bundle exec fastlane certificates
+    - name: Certificates
+      shell: bash
+      run: bundle exec fastlane certificates
     - name: Prepare
       shell: bash
       run: bundle exec fastlane prepare

@@ -1,10 +1,10 @@
-git_url("git@github.com:trykovyura/match-example.git")
+git_url("git@github.com:trykovyura/github-action-template-match.git")
 
 storage_mode("git")
 
 type("development") # The default type, can be: appstore, adhoc, enterprise or development
 
-username("your@email.com") # Your Apple Developer Portal username
+username("me@trykov.ru") # Your Apple Developer Portal username
 
 # For all available options run `fastlane match --help`
 # Remove the # in the beginning of the line to enable the other options

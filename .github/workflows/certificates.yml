@@ -18,7 +18,7 @@ on:
         description: "Select application for update"
         type: choice
         options:
-          - your_app
+          - Demo
       job:
         description: "Certificate task - update или register.\nupdate - updates certificate for app.\nregister - register devices for app with devices.txt file"
         type: choice
