@@ -6,9 +6,9 @@
 #     https://docs.fastlane.tools/actions
 #
 
-import "../MatchFastfile"
-import "../KeychainFastfile"
-import "../DeployFastfile"
+import "MatchFastfile"
+import "KeychainFastfile"
+import "DeployFastfile"
 
 
 default_platform(:ios)

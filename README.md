@@ -28,6 +28,10 @@ Permissions for token:
 - PR - read/write
 - Content - Read access to issues and metadata
 
+Additional file `check.rb` added for logic purpose.
+To run test `check_scpec.rb` use following code `bundle exec rspec ./danger`
+> require rspec at Gemfile
+
 
 ## Enviroments 
 
