@@ -13,6 +13,7 @@ Template for Github Actions. Examples
   - [Fastlane](https://docs.fastlane.tools/getting-started/ios/setup/)
   - [Danger](https://danger.systems/guides/getting_started.html)
   - [Fastlane Plugins](https://docs.fastlane.tools/plugins/using-plugins/)
+  - `bundle lock --add-platform x86_64-linux` - just for ubuntu runs
 
 ### Danger install
 
