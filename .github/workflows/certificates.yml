@@ -34,6 +34,9 @@ jobs:
     steps:
       - name: Echo inputs
         run: echo ${{ github.event.inputs.app }} ${{ github.event.inputs.job }}
+      - name: Bundle
+        shell: bash
+        run: bundle install
   update_certificates:
     if: github.event.inputs.job == 'update'
     name: update certificates
