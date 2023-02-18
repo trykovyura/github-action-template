@@ -1,6 +1,6 @@
 xcov.report(
-   scheme: 'EasyPeasy',
-   workspace: 'Example/EasyPeasy.xcworkspace',
+   scheme: 'Demo',
+   workspace: 'Demo/Demo.xcodeproj',
    exclude_targets: 'Demo.app',
    minimum_coverage_percentage: 0
 )
