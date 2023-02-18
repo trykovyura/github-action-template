@@ -6,9 +6,9 @@
 #     https://docs.fastlane.tools/actions
 #
 
-import "../MatchFastfile"
-import "../KeychainFastfile"
-import "../DeployFastfile"
+import "MatchFastfile"
+import "KeychainFastfile"
+import "DeployFastfile"
 
 
 default_platform(:ios)
@@ -60,8 +60,7 @@ platform :ios do
                     iCloudContainerEnvironment: 'Development',
                     compileBitcode: false,
                     provisioningProfiles: {
-                                          "you.app.id" => "match AdHoc you.app.id",
-                                          "you.app.id" => "match AdHoc you.app.id",
+                                          "you.app.id" => "match AdHoc you.app.id"
                                         }
               }
             )
