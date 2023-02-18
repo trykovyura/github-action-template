@@ -57,6 +57,8 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: 💎 Ruby setup
+        uses: ./.github/actions/ruby-setup
       - name: Prepare
         run: bundle exec fastlane prepare
       - name: Test
