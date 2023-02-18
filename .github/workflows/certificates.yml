@@ -32,9 +32,11 @@ jobs:
     name: setup
     runs-on: [ubuntu-latest]
     steps:
-      - name: Echo inputs
+      - name: 👂 Echo inputs
         run: echo ${{ github.event.inputs.app }} ${{ github.event.inputs.job }}
-      - name: Bundle
+      - name: 💎 Ruby setup
+        uses: ./.github/actions/ruby-setup
+      - name: 🏡 Bundle
         shell: bash
         run: bundle install
   update_certificates:

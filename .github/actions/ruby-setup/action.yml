@@ -1,0 +1,11 @@
+name: 'setup ruby'
+description: 'setup ruby'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 3.1
+        bundler-cache: true

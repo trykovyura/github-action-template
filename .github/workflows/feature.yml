@@ -36,7 +36,7 @@ jobs:
       - uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: 'Build setup'
+      - name: Build setup
         uses: ./.github/actions/build-setup
       - name: Build
         run: bundle exec fastlane beta
@@ -81,7 +81,7 @@ jobs:
       FIREBASEAPPDISTRO_APP: ${{ secrets.FIREBASEAPPDISTRO_APP }}
       FIREBASEAPPDISTRO_GROUPS: ${{ secrets.FIREBASEAPPDISTRO_GROUPS }}
     steps:
-      - name: 'Firebase upload'
+      - name: Firebase upload
         uses: ./.github/actions/firebase-upload
         with:
           artifact-name: 'feature-artifact'
