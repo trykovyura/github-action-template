@@ -24,6 +24,10 @@ Template for Github Actions. Examples
 Make fine-grained tokens https://github.blog/2022-10-18-introducing-fine-grained-personal-access-tokens-for-github/
 For open source in security reasons no token setup
 
+Permissions for token: 
+- PR - read/write
+- Content - Read access to issues and metadata
+
 
 ## Enviroments 
 

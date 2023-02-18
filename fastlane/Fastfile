@@ -60,8 +60,7 @@ platform :ios do
                     iCloudContainerEnvironment: 'Development',
                     compileBitcode: false,
                     provisioningProfiles: {
-                                          "you.app.id" => "match AdHoc you.app.id",
-                                          "you.app.id" => "match AdHoc you.app.id",
+                                          "you.app.id" => "match AdHoc you.app.id"
                                         }
               }
             )
