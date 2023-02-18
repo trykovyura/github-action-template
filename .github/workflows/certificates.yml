@@ -37,9 +37,6 @@ jobs:
         run: echo ${{ github.event.inputs.app }} ${{ github.event.inputs.job }}
       - name: 💎 Ruby setup
         uses: ./.github/actions/ruby-setup
-      - name: 🏡 Bundle
-        shell: bash
-        run: bundle install
   update_certificates:
     if: github.event.inputs.job == 'update'
     name: update certificates
