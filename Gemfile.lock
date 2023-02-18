@@ -48,6 +48,9 @@ GEM
       no_proxy_fix
       octokit (~> 5.0)
       terminal-table (>= 1, < 4)
+    danger-xcov (0.5.0)
+      danger (>= 2.1)
+      xcov (>= 1.7.3)
     declarative (0.0.20)
     diff-lcs (1.5.0)
     digest-crc (0.6.4)
@@ -237,6 +240,7 @@ GEM
     simctl (1.6.10)
       CFPropertyList
       naturally
+    slack-notifier (2.4.0)
     terminal-notifier (2.0.0)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
@@ -259,10 +263,18 @@ GEM
       colored2 (~> 3.1)
       nanaimo (~> 0.3.0)
       rexml (~> 3.2.4)
+    xcov (1.8.1)
+      fastlane (>= 2.141.0, < 3.0.0)
+      multipart-post
+      slack-notifier
+      terminal-table
+      xcodeproj
+      xcresult (~> 0.2.0)
     xcpretty (0.3.0)
       rouge (~> 2.0.7)
     xcpretty-travis-formatter (1.0.1)
       xcpretty (~> 0.2, >= 0.0.7)
+    xcresult (0.2.1)
 
 PLATFORMS
   arm64-darwin-21
@@ -270,6 +282,7 @@ PLATFORMS
 
 DEPENDENCIES
   danger
+  danger-xcov
   fastlane
   fastlane-plugin-firebase_app_distribution (= 0.3.7)
   fastlane-plugin-xcodegen (= 1.1.0)

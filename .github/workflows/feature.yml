@@ -60,6 +60,8 @@ jobs:
         run: bundle exec fastlane prepare
       - name: Test
         run: bundle exec fastlane scan
+      - name: Code Coverage
+        run: bundle exec danger --verbose --dangerfile=danger/Dangerfile.xcov --danger_id=code_coverage
       - uses: actions/upload-artifact@v3
         with:
           name: 'test-artifact'

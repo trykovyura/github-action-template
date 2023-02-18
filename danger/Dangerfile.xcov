@@ -1,0 +1,10 @@
+xcov.report(
+   scheme: 'EasyPeasy',
+   workspace: 'Example/EasyPeasy.xcworkspace',
+   exclude_targets: 'Demo.app',
+   minimum_coverage_percentage: 0
+)
+# Do some custom filtering with the report here
+
+# Post markdown report
+xcov.output_report(report)
