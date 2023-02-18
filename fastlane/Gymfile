@@ -1,4 +1,5 @@
-scheme("YourAppScheme")
+project("Demo/Demo.xcodeproj")
+scheme("Demo")
 build_path("build")
 archive_path("build/archive")
 derived_data_path("build/derived_data")

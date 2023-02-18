@@ -2,12 +2,18 @@
   # Match
   #
   desc "Register new devices"
+  desc "APP_STORE_CONNECT_API_KEY_KEY_ID"
+  desc "APP_STORE_CONNECT_API_KEY_ISSUER_ID"
+  desc "APP_STORE_CONNECT_API_KEY_KEY"
   lane :register_new_devices do
     api_key = app_store_connect_api_key()
     register_devices(api_key: api_key, devices_file: "./fastlane/devices.txt")
     register_new_devices_production
   end
 
+  desc "APP_STORE_CONNECT_API_KEY_KEY_ID"
+  desc "APP_STORE_CONNECT_API_KEY_ISSUER_ID"
+  desc "APP_STORE_CONNECT_API_KEY_KEY"
   lane :register_new_devices_production do
     api_key = app_store_connect_api_key()
     match(api_key: api_key, type: "development", force_for_new_devices: true, readonly: false)
@@ -23,6 +29,9 @@
   end
 
   desc "Renew certificates for production scheme"
+  desc "APP_STORE_CONNECT_API_KEY_KEY_ID"
+  desc "APP_STORE_CONNECT_API_KEY_ISSUER_ID"
+  desc "APP_STORE_CONNECT_API_KEY_KEY"
   lane :renew_certificates do
     api_key = app_store_connect_api_key()
     match(api_key: api_key, type: "development", force: true)

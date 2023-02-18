@@ -23,10 +23,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.1
-          bundler-cache: true
-      - name: Danger
+      - name: 💎 Ruby setup
+        uses: ./.github/actions/ruby-setup
+      - name: ⚠️ Danger
         run: bundle exec danger --dangerfile=danger/Dangerfile --danger_id=checks --verbose
+      - name: Code Coverage
+        run: bundle exec danger --verbose --dangerfile=danger/Dangerfile.xcov --danger_id=code_coverage
