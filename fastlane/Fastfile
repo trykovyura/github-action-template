@@ -16,7 +16,7 @@ default_platform(:ios)
 platform :ios do
 
   before_all do |lane|
-    xcode_select("/Applications/Xcode_14.1.app")
+    #xcode_select("/Applications/Xcode_14.1.app")
     lanes_with_keychain = [:certificates, :renew_certificates]
     if lanes_with_keychain.include?(lane)
       keychain_prepare
