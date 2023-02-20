@@ -15,7 +15,7 @@ runs:
   steps:
     - name: Prepare
       shell: bash
-      run: bundle exec fastlane prepare
+      run: bundle exec fastlane prepare && bundle exec fastlane install_plugins
     - uses: actions/download-artifact@v3
       with:
         name: ${{ inputs.artifact-name }}
