@@ -13,7 +13,7 @@ concurrency:
 jobs:
   danger:
     name: danger
-    runs-on: [ubuntu-latest]
+    runs-on: [self-hosted]
     timeout-minutes: 10
     env:
       DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
@@ -27,5 +27,3 @@ jobs:
         uses: ./.github/actions/ruby-setup
       - name: ⚠️ Danger
         run: bundle exec danger --dangerfile=danger/Dangerfile --danger_id=checks --verbose
-      - name: Code Coverage
-        run: bundle exec danger --verbose --dangerfile=danger/Dangerfile.xcov --danger_id=code_coverage

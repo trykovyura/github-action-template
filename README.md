@@ -40,3 +40,7 @@ To run test `check_scpec.rb` use following code `bundle exec rspec ./danger`
 ## Enviroments 
 
 - `SSH_PRIVATE_KEY` - secret with your private key for cloning private repos. [Instructions for creating key](https://github.com/webfactory/ssh-agent#usage).
+
+### Build
+- `OUTPUT_DIRECTORY` - ipa output directory. Usually uses Gymfile output directory param. 
+- `TEST_OUTPUT_DIRECTORY` - test artefact output directory. Usually uses Scanfile output directory param.

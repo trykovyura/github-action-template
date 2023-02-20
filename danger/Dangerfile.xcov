@@ -9,7 +9,6 @@ begin
       derived_data_path: 'build/derived_data/',
       output_directory: 'build/test_output/xcov_output',
     )
-  end
 rescue => e
   warn e.inspect
 end

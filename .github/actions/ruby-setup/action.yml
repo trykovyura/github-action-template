@@ -5,7 +5,13 @@ runs:
   using: "composite"
   steps:
     - name: Set up Ruby
+      id: ruby
       uses: ruby/setup-ruby@v1
+      continue-on-error: true
       with:
         ruby-version: '3.1' # Not needed with a .ruby-version file
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Set up local Ruby
+      if: steps.ruby.outcome == 'failure'
+      shell: bash
+      run: bundle install

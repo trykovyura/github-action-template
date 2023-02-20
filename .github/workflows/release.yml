@@ -16,7 +16,7 @@ concurrency:
 jobs:
   build:
 
-    runs-on: [macos-latest]
+    runs-on: [self-hosted]
     timeout-minutes: 15
     env:
       LC_ALL: en_US.UTF-8
@@ -47,7 +47,7 @@ jobs:
           retention-days: 1
 
   tests:
-    runs-on: [macos-latest]
+    runs-on: [self-hosted]
     timeout-minutes: 15
     needs: [build]
     env:
@@ -63,7 +63,7 @@ jobs:
         run: bundle exec fastlane scan
 
   firebase_deploy:
-    runs-on: [macos-latest]
+    runs-on: [self-hosted]
     timeout-minutes: 15
     needs: [build]
     env:
@@ -82,7 +82,7 @@ jobs:
           output-directory: ${{ secrets.OUTPUT_DIRECTORY }}
 
   testflight_deploy:
-    runs-on: [macos-latest]
+    runs-on: [self-hosted]
     timeout-minutes: 15
     needs: [build]
     env:

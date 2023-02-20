@@ -33,14 +33,14 @@ on:
 jobs:
   setup:
     name: setup
-    runs-on: [macos-latest]
+    runs-on: [self-hosted]
     steps:
       - name: 👂 Echo inputs
         run: echo ${{ github.event.inputs.app }} ${{ github.event.inputs.job }}
   update_certificates:
     if: github.event.inputs.job == 'update'
     name: update certificates
-    runs-on: [macos-latest]
+    runs-on: [self-hosted]
     timeout-minutes: 15
     needs: setup
     steps:
@@ -56,7 +56,7 @@ jobs:
   register_devices:
     if: github.event.inputs.job == 'register'
     name: register devices
-    runs-on: [macos-latest]
+    runs-on: [self-hosted]
     timeout-minutes: 15
     needs: setup
     steps:
@@ -72,7 +72,7 @@ jobs:
   nuke:
     if: github.event.inputs.job == 'nuke'
     name: nuke certificates
-    runs-on: [macos-latest]
+    runs-on: [self-hosted]
     timeout-minutes: 15
     needs: setup
     steps:
