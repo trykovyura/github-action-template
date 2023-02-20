@@ -53,7 +53,7 @@ platform :ios do
   end
   desc "Build scheme in debug mode and upload to Crashlytics"
   lane :beta do |values|
-    build_app(
+    build_ios_app(
               export_method: 'ad-hoc',
               export_xcargs: "-allowProvisioningUpdates",
               export_options: {
