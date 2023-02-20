@@ -66,8 +66,11 @@ To run test `check_scpec.rb` use following code `bundle exec rspec ./danger`
 - `GOOGLE_SERVICES_INFO_PLIST_PATH` - Path to your GoogleService-Info.plist file, relative to the archived product path
 
 #### Testflight
-- `FL_UPLOAD_SYMBOLS_TO_CRASHLYTICS_DSYM_PATH` - Path to the DSYM file or zip to upload
 - `APP_STORE_CONNECT_API_KEY_ISSUER_ID` - The issuer ID
 - `APP_STORE_CONNECT_API_KEY_KEY_ID` - The key ID
 - `APP_STORE_CONNECT_API_KEY_KEY` - The content of the key p8 file
 - `IPA_OUTPUT_PATH` - Path for ipa
+
+#### Dsym
+- `FL_UPLOAD_SYMBOLS_TO_CRASHLYTICS_DSYM_PATH` - Path to the DSYM file or zip to upload
+- `FL_UPLOAD_SYMBOLS_TO_CRASHLYTICS_BINARY_PATH` - The path to the upload-symbols file of the Fabric app

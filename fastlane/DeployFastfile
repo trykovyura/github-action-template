@@ -72,6 +72,7 @@ platform :ios do
   desc "Upload dSYMs from local build"
   desc "FL_UPLOAD_SYMBOLS_TO_CRASHLYTICS_DSYM_PATH - path for dsym file - example build/artifacts/App.app.dSYM.zip"
   desc "GOOGLE_SERVICES_INFO_PLIST_PATH - path for GoogleService-Info.plist file"
+  desc "source code https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/upload_symbols_to_crashlytics.rb"
   lane :upload_dsyms do
     upload_symbols_to_crashlytics()
   end
