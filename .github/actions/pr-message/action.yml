@@ -1,0 +1,26 @@
+name: 'message pr'
+description: 'Notify PR with download link'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Firebase Latest Release
+      shell: bash
+      id: firebase
+      run: bundle exec fastlane firebase_latest_release
+    - name: Find Current PR
+      uses: jwalton/gh-find-current-pr@v1
+      id: findPr
+      with:
+        # Can be "open", "closed", or "all".  Defaults to "open".
+        state: all
+    - name: Comment PR
+      uses: thollander/actions-comment-pull-request@v2
+      with:
+        message: |
+          New version available! :wave: [Download](${{ steps.firebase.outputs.download }})
+          Version: ${{ steps.firebase.outputs.displayVersion }}
+          Number: ${{ steps.firebase.outputs.buildVersion }}
+          Firebase console link: ${{ steps.firebase.outputs.console }}
+        reactions: eyes, rocket
+        pr_number: ${{ steps.findPr.outputs.pr }}  # This will comment on pull request #123

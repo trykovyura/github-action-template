@@ -14,6 +14,7 @@ Template for Github Actions. Examples
   - [Danger](https://danger.systems/guides/getting_started.html)
   - [Fastlane Plugins](https://docs.fastlane.tools/plugins/using-plugins/)
   - `bundle lock --add-platform x86_64-linux` - just for ubuntu runs
+  - `bundle lock --add-platform x86_64-darwin-19` - just for macos runs
 
 ### Danger install
 
@@ -32,7 +33,10 @@ Additional file `check.rb` added for logic purpose.
 To run test `check_scpec.rb` use following code `bundle exec rspec ./danger`
 > require rspec at Gemfile
 
-
+####  Danger xcov
+- [Plugin](https://github.com/fastlane-community/danger-xcov) 
+- `gem 'danger-xcov'`
+- 
 ## Enviroments 
 
 - `SSH_PRIVATE_KEY` - secret with your private key for cloning private repos. [Instructions for creating key](https://github.com/webfactory/ssh-agent#usage).

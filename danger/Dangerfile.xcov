@@ -1,0 +1,15 @@
+begin
+    xcov.report(
+      xccov_file_direct_path: 'build/test_output/Demo.xcresult',
+      scheme: 'Demo',
+      workspace: 'Demo/Demo.xcodeproj',
+      skip_slack: true,
+      disable_coveralls: true,
+      minimum_coverage_percentage: 0.0,
+      derived_data_path: 'build/derived_data/',
+      output_directory: 'build/test_output/xcov_output',
+    )
+  end
+rescue => e
+  warn e.inspect
+end

@@ -79,3 +79,24 @@
   lane :upload_metadata do
     deliver(metadata_only: true)
   end
+
+  desc "Get Latest Release of Firebase App Distribution"
+  desc "FIREBASE_TOKEN for firebase_cli_token params"
+  desc "FIREBASEAPPDISTRO_GROUPS testers group"
+  desc "FIREBASEAPPDISTRO_APP app identifier"
+  desc "https://firebase.google.com/docs/reference/app-distribution/rest/v1/projects.apps.releases#resource:-release"
+  desc "The return value of the action is a hash representing the latest release"
+  desc "FIREBASE_APP_DISTRO_LATEST_RELEASE"
+  lane :firebase_latest_release do |values|
+    firebase_app_distribution_get_latest_release(
+          debug: true
+    )
+    # Выставляем перменной шага для Github Actions
+    # Дальше используем в уведомлении PR
+    latest_release = Actions.lane_context[:FIREBASE_APP_DISTRO_LATEST_RELEASE]
+    sh("echo createTime=#{latest_release[:createTime]} >> $GITHUB_OUTPUT")
+    sh("echo displayVersion=#{latest_release[:displayVersion]} >> $GITHUB_OUTPUT")
+    sh("echo buildVersion=#{latest_release[:buildVersion]} >> $GITHUB_OUTPUT")
+    sh("echo console=#{latest_release[:firebaseConsoleUri]} >> $GITHUB_OUTPUT")
+    sh("echo download=#{latest_release[:binaryDownloadUri]} >> $GITHUB_OUTPUT")
+  end

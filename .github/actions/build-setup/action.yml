@@ -7,9 +7,6 @@ runs:
     - name: Bundle
       shell: bash
       run: bundle install
-    - name: Brew
-      shell: bash
-      run: brew list rswift || brew install rswift
     - name: Plugins
       shell: bash
       run: bundle exec fastlane install_plugins
@@ -19,6 +16,9 @@ runs:
     - name: Prepare
       shell: bash
       run: bundle exec fastlane prepare
+    - name: Set FL_BUILD_NUMBER_PROJECT
+      shell: bash
+      run: echo "FL_BUILD_NUMBER_PROJECT=Demo/Demo.xcodeproj" >> $GITHUB_ENV
     - name: Increment
       shell: bash
       run: bundle exec fastlane run increment_build_number build_number:${{github.run_id}}

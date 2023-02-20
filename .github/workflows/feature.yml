@@ -36,7 +36,7 @@ jobs:
       - uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: 'Build setup'
+      - name: Build setup
         uses: ./.github/actions/build-setup
       - name: Build
         run: bundle exec fastlane beta
@@ -47,19 +47,25 @@ jobs:
           retention-days: 1
   tests:
     runs-on: [ macos-latest ]
+    if: always()
     timeout-minutes: 15
     needs: [ build ]
     env:
       LC_ALL: en_US.UTF-8
       LANG: en_US.UTF-8
+      DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: 💎 Ruby setup
+        uses: ./.github/actions/ruby-setup
       - name: Prepare
         run: bundle exec fastlane prepare
       - name: Test
         run: bundle exec fastlane scan
+      - name: Code Coverage
+        run: bundle exec danger --verbose --dangerfile=danger/Dangerfile.xcov --danger_id=code_coverage
       - uses: actions/upload-artifact@v3
         with:
           name: 'test-artifact'
@@ -79,7 +85,7 @@ jobs:
       FIREBASEAPPDISTRO_APP: ${{ secrets.FIREBASEAPPDISTRO_APP }}
       FIREBASEAPPDISTRO_GROUPS: ${{ secrets.FIREBASEAPPDISTRO_GROUPS }}
     steps:
-      - name: 'Firebase upload'
+      - name: Firebase upload
         uses: ./.github/actions/firebase-upload
         with:
           artifact-name: 'feature-artifact'
