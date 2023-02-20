@@ -1,3 +1,4 @@
+platform :ios do
   #
   # Match
   #
@@ -49,3 +50,4 @@
     match(api_key: api_key, type: "adhoc", force: true,  keychain_name: ENV["KEYCHAIN_NAME"], keychain_password: ENV["KEYCHAIN_PASSWORD"])
     match(api_key: api_key, type: "appstore", force: true,  keychain_name: ENV["KEYCHAIN_NAME"], keychain_password: ENV["KEYCHAIN_PASSWORD"])
   end
+end
