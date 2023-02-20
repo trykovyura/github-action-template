@@ -1,7 +1,10 @@
+platform :ios do
   #
   # Match
   #
   desc "Register new devices"
+  desc "KEYCHAIN_NAME"
+  desc "KEYCHAIN_PASSWORD"
   desc "APP_STORE_CONNECT_API_KEY_KEY_ID"
   desc "APP_STORE_CONNECT_API_KEY_ISSUER_ID"
   desc "APP_STORE_CONNECT_API_KEY_KEY"
@@ -11,30 +14,40 @@
     register_new_devices_production
   end
 
+  desc "KEYCHAIN_NAME"
+  desc "KEYCHAIN_PASSWORD"
   desc "APP_STORE_CONNECT_API_KEY_KEY_ID"
   desc "APP_STORE_CONNECT_API_KEY_ISSUER_ID"
   desc "APP_STORE_CONNECT_API_KEY_KEY"
   lane :register_new_devices_production do
     api_key = app_store_connect_api_key()
-    match(api_key: api_key, type: "development", force_for_new_devices: true, readonly: false)
-    match(api_key: api_key, type: "adhoc", force_for_new_devices: true, readonly: false)
-    match(api_key: api_key, type: "appstore", force_for_new_devices: true, readonly: false)
+    match(api_key: api_key, type: "development", force_for_new_devices: true, readonly: false,
+      keychain_name: ENV["KEYCHAIN_NAME"], keychain_password: ENV["KEYCHAIN_PASSWORD"])
+    match(api_key: api_key, type: "adhoc", force_for_new_devices: true, readonly: false,
+      keychain_name: ENV["KEYCHAIN_NAME"], keychain_password: ENV["KEYCHAIN_PASSWORD"])
+    match(api_key: api_key, type: "appstore", force_for_new_devices: true, readonly: false,
+      keychain_name: ENV["KEYCHAIN_NAME"], keychain_password: ENV["KEYCHAIN_PASSWORD"])
   end
 
   desc "Download certificates"
+  desc "KEYCHAIN_NAME"
+  desc "KEYCHAIN_PASSWORD"
   lane :certificates do
-    match(type: "development", readonly: true)
-    match(type: "adhoc", readonly: true)
-    match(type: "appstore", readonly: true)
+    match(type: "development", readonly: true,  keychain_name: ENV["KEYCHAIN_NAME"], keychain_password: ENV["KEYCHAIN_PASSWORD"])
+    match(type: "adhoc", readonly: true,  keychain_name: ENV["KEYCHAIN_NAME"], keychain_password: ENV["KEYCHAIN_PASSWORD"])
+    match(type: "appstore", readonly: true,  keychain_name: ENV["KEYCHAIN_NAME"], keychain_password: ENV["KEYCHAIN_PASSWORD"])
   end
 
   desc "Renew certificates for production scheme"
+  desc "KEYCHAIN_NAME"
+  desc "KEYCHAIN_PASSWORD"
   desc "APP_STORE_CONNECT_API_KEY_KEY_ID"
   desc "APP_STORE_CONNECT_API_KEY_ISSUER_ID"
   desc "APP_STORE_CONNECT_API_KEY_KEY"
   lane :renew_certificates do
     api_key = app_store_connect_api_key()
-    match(api_key: api_key, type: "development", force: true)
-    match(api_key: api_key, type: "adhoc", force: true)
-    match(api_key: api_key, type: "appstore", force: true)
+    match(api_key: api_key, type: "development", force: true,  keychain_name: ENV["KEYCHAIN_NAME"], keychain_password: ENV["KEYCHAIN_PASSWORD"])
+    match(api_key: api_key, type: "adhoc", force: true,  keychain_name: ENV["KEYCHAIN_NAME"], keychain_password: ENV["KEYCHAIN_PASSWORD"])
+    match(api_key: api_key, type: "appstore", force: true,  keychain_name: ENV["KEYCHAIN_NAME"], keychain_password: ENV["KEYCHAIN_PASSWORD"])
   end
+end
