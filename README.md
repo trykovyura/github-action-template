@@ -70,3 +70,4 @@ To run test `check_scpec.rb` use following code `bundle exec rspec ./danger`
 - `APP_STORE_CONNECT_API_KEY_ISSUER_ID` - The issuer ID
 - `APP_STORE_CONNECT_API_KEY_KEY_ID` - The key ID
 - `APP_STORE_CONNECT_API_KEY_KEY` - The content of the key p8 file
+- `IPA_OUTPUT_PATH` - Path for ipa
