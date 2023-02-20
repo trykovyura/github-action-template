@@ -1,3 +1,4 @@
+platform :ios do
   #
   # Deploy
   #
@@ -100,3 +101,4 @@
     sh("echo console=#{latest_release[:firebaseConsoleUri]} >> $GITHUB_OUTPUT")
     sh("echo download=#{latest_release[:binaryDownloadUri]} >> $GITHUB_OUTPUT")
   end
+end

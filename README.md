@@ -47,24 +47,26 @@ To run test `check_scpec.rb` use following code `bundle exec rspec ./danger`
 - `FASTLANE_XCODEBUILD_SETTINGS_RETRIES` - number of build retries. Usually 10 is enough.
 
 ### Certificates
-- `MATCH_GIT_BASIC_AUTHORIZATION`
-- `MATCH_PASSWORD`
-- `KEYCHAIN_NAME`
-- `KEYCHAIN_PASSWORD`
-- `APP_STORE_CONNECT_API_KEY_ISSUER_ID`
-- `APP_STORE_CONNECT_API_KEY_KEY_ID`
-- `APP_STORE_CONNECT_API_KEY_KEY`
+- `MATCH_GIT_BASIC_AUTHORIZATION` -  a basic authorization header to access the git repo (e.g.: access via HTTPS, GitHub Actions, etc), usually a string in Base64
+- `MATCH_PASSWORD` - Your encryption password as secret environment variable
+- `KEYCHAIN_NAME` - Keychain name
+- `KEYCHAIN_PASSWORD` - Keychain password
+- `APP_STORE_CONNECT_API_KEY_ISSUER_ID` - The issuer ID
+- `APP_STORE_CONNECT_API_KEY_KEY_ID` - The key ID
+- `APP_STORE_CONNECT_API_KEY_KEY` - The content of the key p8 file
 
 ### Deploy
 
 #### Firebase
 - `FIREBASE_APP`
-- `FIREBASE_TOKEN`
-- `FIREBASEAPPDISTRO_APP`
-- `FIREBASEAPPDISTRO_GROUPS`
+- `FIREBASE_TOKEN` - Auth token generated using the Firebase CLI's login:ci command
+- `FIREBASEAPPDISTRO_APP` - Your app's Firebase App ID. You can find the App ID in the Firebase console, on the General Settings page
+- `FIREBASEAPPDISTRO_GROUPS` - The group aliases used for distribution, separated by commas
+- `FIREBASEAPPDISTRO_IPA_PATH` - Path to your IPA file. Optional if you use the _gym_ or _xcodebuild_ action
+- `GOOGLE_SERVICES_INFO_PLIST_PATH` - Path to your GoogleService-Info.plist file, relative to the archived product path
 
 #### Testflight
-- `FL_UPLOAD_SYMBOLS_TO_CRASHLYTICS_DSYM_PATH`
-- `APP_STORE_CONNECT_API_KEY_ISSUER_ID`
-- `APP_STORE_CONNECT_API_KEY_KEY_ID`
-- `APP_STORE_CONNECT_API_KEY_KEY`
+- `FL_UPLOAD_SYMBOLS_TO_CRASHLYTICS_DSYM_PATH` - Path to the DSYM file or zip to upload
+- `APP_STORE_CONNECT_API_KEY_ISSUER_ID` - The issuer ID
+- `APP_STORE_CONNECT_API_KEY_KEY_ID` - The key ID
+- `APP_STORE_CONNECT_API_KEY_KEY` - The content of the key p8 file
