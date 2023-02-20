@@ -46,7 +46,7 @@ jobs:
           path: ${{ secrets.OUTPUT_DIRECTORY }}
           retention-days: 1
   tests:
-    runs-on: [ macos-latest ]
+    runs-on: [self-hosted]
     if: always()
     timeout-minutes: 15
     needs: [ build ]
