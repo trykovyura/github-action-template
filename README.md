@@ -44,3 +44,27 @@ To run test `check_scpec.rb` use following code `bundle exec rspec ./danger`
 ### Build
 - `OUTPUT_DIRECTORY` - ipa output directory. Usually uses Gymfile output directory param. 
 - `TEST_OUTPUT_DIRECTORY` - test artefact output directory. Usually uses Scanfile output directory param.
+- `FASTLANE_XCODEBUILD_SETTINGS_RETRIES` - number of build retries. Usually 10 is enough.
+
+### Certificates
+- `MATCH_GIT_BASIC_AUTHORIZATION`
+- `MATCH_PASSWORD`
+- `KEYCHAIN_NAME`
+- `KEYCHAIN_PASSWORD`
+- `APP_STORE_CONNECT_API_KEY_ISSUER_ID`
+- `APP_STORE_CONNECT_API_KEY_KEY_ID`
+- `APP_STORE_CONNECT_API_KEY_KEY`
+
+### Deploy
+
+#### Firebase
+- `FIREBASE_APP`
+- `FIREBASE_TOKEN`
+- `FIREBASEAPPDISTRO_APP`
+- `FIREBASEAPPDISTRO_GROUPS`
+
+#### Testflight
+- `FL_UPLOAD_SYMBOLS_TO_CRASHLYTICS_DSYM_PATH`
+- `APP_STORE_CONNECT_API_KEY_ISSUER_ID`
+- `APP_STORE_CONNECT_API_KEY_KEY_ID`
+- `APP_STORE_CONNECT_API_KEY_KEY`
