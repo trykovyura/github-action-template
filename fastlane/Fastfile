@@ -57,7 +57,6 @@ platform :ios do
               export_method: 'ad-hoc',
               export_xcargs: "-allowProvisioningUpdates",
               export_options: {
-                    iCloudContainerEnvironment: 'Development',
                     compileBitcode: false,
                     provisioningProfiles: {
                                           "your.app.id.Demo" => "match AdHoc your.app.id.Demo"
