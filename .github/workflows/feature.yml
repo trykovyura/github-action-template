@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  OUTPUT_DIRECTORY: ${{ env.OUTPUT_DIRECTORY }}
+  OUTPUT_DIRECTORY: ${{ vars.OUTPUT_DIRECTORY }}
   IPA_OUTPUT_PATH: ${{ vars.IPA_OUTPUT_PATH }}
 
 concurrency:
