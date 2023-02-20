@@ -16,7 +16,7 @@ concurrency:
 jobs:
   build:
 
-    runs-on: [macos-latest]
+    runs-on: [self-hosted]
     timeout-minutes: 15
     env:
       LC_ALL: en_US.UTF-8
@@ -73,7 +73,7 @@ jobs:
           retention-days: 1
 
   firebase_deploy:
-    runs-on: [macos-latest]
+    runs-on: [self-hosted]
     timeout-minutes: 15
     needs: [build]
     env:
