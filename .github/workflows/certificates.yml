@@ -61,8 +61,8 @@ jobs:
     needs: setup
     steps:
       - uses: actions/checkout@v3
-      - name: 💎 Ruby setup
-        uses: ./.github/actions/ruby-setup
+#      - name: 💎 Ruby setup
+#        uses: ./.github/actions/ruby-setup
       - name: webfactory/ssh-agent
         uses: webfactory/ssh-agent@v0.5.4
         with:
@@ -78,6 +78,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: 💎 Ruby setup
+        if: github.event.label.name == 'self-hosted'
         uses: ./.github/actions/ruby-setup
       - name: webfactory/ssh-agent
         uses: webfactory/ssh-agent@v0.5.4
