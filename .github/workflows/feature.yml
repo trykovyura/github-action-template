@@ -8,7 +8,7 @@ on:
 
 env:
   OUTPUT_DIRECTORY: ${{ env.OUTPUT_DIRECTORY }}
-  IPA_OUTPUT_PATH: ${{ env.IPA_OUTPUT_PATH }}
+  IPA_OUTPUT_PATH: ${{ vars.IPA_OUTPUT_PATH }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -44,7 +44,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: 'feature-artifact'
-          path: ${{ env.OUTPUT_DIRECTORY }}
+          path: ${{ vars.OUTPUT_DIRECTORY }}
           retention-days: 1
   tests:
     runs-on: [self-hosted]
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: 'test-artifact'
-          path: ${{ env.TEST_OUTPUT_DIRECTORY }}
+          path: ${{ vars.TEST_OUTPUT_DIRECTORY }}
           retention-days: 1
 
   firebase_deploy:
@@ -90,4 +90,4 @@ jobs:
         uses: ./.github/actions/firebase-upload
         with:
           artifact-name: 'feature-artifact'
-          output-directory: ${{ env.OUTPUT_DIRECTORY }}
+          output-directory: ${{ vars.OUTPUT_DIRECTORY }}
