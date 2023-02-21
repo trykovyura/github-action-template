@@ -74,7 +74,7 @@ platform :ios do
   desc "GOOGLE_SERVICES_INFO_PLIST_PATH - path for GoogleService-Info.plist file"
   desc "source code https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/upload_symbols_to_crashlytics.rb"
   lane :upload_dsyms do
-    upload_symbols_to_crashlytics()
+    upload_symbols_to_crashlytics(binary_path: './scripts/upload-symbols')
   end
 
   desc "Uploads metadata only - no ipa file will be uploaded"
