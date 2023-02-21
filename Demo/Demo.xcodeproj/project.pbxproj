@@ -165,6 +165,9 @@
 				Base,
 			);
 			mainGroup = 9E2C1AC429A0ED470049664B;
+			packageReferences = (
+				9ED92EBF29A4058C004D3B8E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 9E2C1ACE29A0ED470049664B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -409,7 +412,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = your.app.id.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore your.app.id.Demo";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc your.app.id.Demo";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore your.app.id.Demo";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -496,6 +499,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9ED92EBF29A4058C004D3B8E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = exactVersion;
+				version = 9.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 9E2C1AC529A0ED470049664B /* Project object */;
 }
