@@ -16,4 +16,10 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Output Run ID
+        run: echo ${{ github.run_id }}
+      - name: Output Run Number
+        run: echo ${{ github.run_number }}
+      - name: Output Run Attempt
+        run: echo ${{ github.run_attempt }}
       - run: xcodebuild -scheme Demo -project Demo/Demo.xcodeproj build
