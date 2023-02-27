@@ -16,4 +16,4 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: xcodebuild -scheme Demo build
+      - run: xcodebuild -scheme Demo -project Demo/Demo.xcodeproj build
