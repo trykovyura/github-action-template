@@ -74,3 +74,30 @@ To run test `check_scpec.rb` use following code `bundle exec rspec ./danger`
 #### Dsym
 - `FL_UPLOAD_SYMBOLS_TO_CRASHLYTICS_DSYM_PATH` - Path to the DSYM file or zip to upload
 - `FL_UPLOAD_SYMBOLS_TO_CRASHLYTICS_BINARY_PATH` - The path to the upload-symbols file of the Fabric app
+
+
+# Awesome Actions
+## Starters workflow
+- https://github.com/actions/starter-workflows
+
+## Utils
+- https://github.com/webfactory/ssh-agent
+- Google https://github.com/google-github-actions
+- AWS https://github.com/aws-actions
+- Github https://github.com/actions/
+
+## Notifications
+- Jira https://github.com/atlassian/gajira
+- Slack https://github.com/slackapi/slack-github-action
+
+## Code Review
+- https://github.com/necojackarc/auto-request-review
+- https://github.com/kentaro-m/auto-assign-action
+
+## PR
+- Stale https://github.com/actions/stale
+- Labeler https://github.com/actions/labeler
+- TODO Issue https://github.com/atlassian/gajira-todo
+
+## Ecosystem
+- Crowdin https://github.com/crowdin/github-action
