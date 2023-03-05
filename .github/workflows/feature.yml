@@ -9,6 +9,8 @@ on:
 env:
   OUTPUT_DIRECTORY: ${{ vars.OUTPUT_DIRECTORY }}
   IPA_OUTPUT_PATH: ${{ vars.IPA_OUTPUT_PATH }}
+  FL_UNLOCK_KEYCHAIN_PASSWORD: ${{ secrets.FL_UNLOCK_KEYCHAIN_PASSWORD }}
+  FL_UNLOCK_KEYCHAIN_PATH: ${{ secrets.FL_UNLOCK_KEYCHAIN_PATH }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
